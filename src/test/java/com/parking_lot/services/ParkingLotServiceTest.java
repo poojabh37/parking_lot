@@ -4,9 +4,9 @@ import com.parking_lot.model.ParkingLot;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class ParkingLotCreatorServiceTest {
+public class ParkingLotServiceTest {
 
-    private ParkingLotCreatorService parkingLotCreatorService = ParkingLotCreatorService.getInstance();
+    private ParkingLotService parkingLotCreatorService = ParkingLotService.getInstance();
 
     @Test
     public void test_parkingLot_created_successfully() {
