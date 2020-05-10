@@ -5,8 +5,20 @@ import java.util.List;
 
 public class ParkingLot {
 
+    private static ParkingLot instance;
     private List<ParkingSlot> parkingSlots = new ArrayList<>();
     private int totalCapacity;
+
+    private ParkingLot() {
+
+    }
+
+    public static ParkingLot getInstance() {
+        if (instance == null) {
+            instance = new ParkingLot();
+        }
+        return instance;
+    }
 
     public List<ParkingSlot> getParkingSlots() {
         return parkingSlots;

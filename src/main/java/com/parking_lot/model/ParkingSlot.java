@@ -6,6 +6,10 @@ public class ParkingSlot {
     private String registrationNumber;
     private boolean isOccupied;
 
+    public ParkingSlot(int slotNumber) {
+        this.slotNumber = slotNumber;
+    }
+
     public int getSlotNumber() {
         return slotNumber;
     }
