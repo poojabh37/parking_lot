@@ -17,7 +17,7 @@ public class ParkingChargeCalculatorTest {
 
     @Before
     public void init() {
-        parkingLotService.createParkingLot(PARKING_LOT_CAPACITY);
+        parkingLotService.create(PARKING_LOT_CAPACITY);
         assignAllSlots();
     }
 

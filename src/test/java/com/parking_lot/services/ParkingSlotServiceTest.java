@@ -19,13 +19,13 @@ public class ParkingSlotServiceTest {
 
     @Before
     public void init() {
-        parkingLotService.createParkingLot(PARKING_LOT_CAPACITY);
+        parkingLotService.create(PARKING_LOT_CAPACITY);
     }
 
     @Test
     public void test_assign_first_parkingSlot_Successful() {
         //when
-        parkingSlotService.assignParkingSpot(REGISTRATION_NUMBER);
+        parkingSlotService.assignSlot(REGISTRATION_NUMBER);
         //then
         ParkingSlot parkingSlot = ParkingLot.getInstance().getParkingSlots().get(0);
         Assert.assertTrue(parkingSlot.isOccupied());
@@ -37,7 +37,7 @@ public class ParkingSlotServiceTest {
         //given
         assignAllSlots();
         //when
-        parkingSlotService.assignParkingSpot(REGISTRATION_NUMBER);
+        parkingSlotService.assignSlot(REGISTRATION_NUMBER);
         //then
         List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
         Assert.assertFalse(parkingSlots
@@ -58,7 +58,7 @@ public class ParkingSlotServiceTest {
         //given
         assignSlots();
         //when
-        parkingSlotService.unAssignParkingSpot(REGISTRATION_NUMBER, 5);
+        parkingSlotService.unassignSlot(REGISTRATION_NUMBER, 5);
         //then
         List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
         Assert.assertFalse(parkingSlots.get(1).isOccupied());
@@ -84,7 +84,7 @@ public class ParkingSlotServiceTest {
         //given
         assignAllSlots();
         //when
-        parkingSlotService.unAssignParkingSpot(REGISTRATION_NUMBER, 5);
+        parkingSlotService.unassignSlot(REGISTRATION_NUMBER, 5);
         //then
         List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
         Assert.assertFalse(parkingSlots

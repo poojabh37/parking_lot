@@ -10,7 +10,7 @@ public class ParkingLotServiceTest {
 
     @Test
     public void test_parkingLot_created_successfully() {
-        parkingLotCreatorService.createParkingLot(5);
+        parkingLotCreatorService.create(5);
         Assert.assertEquals(5, ParkingLot.getInstance().getTotalCapacity());
     }
 }
