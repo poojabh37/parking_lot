@@ -31,9 +31,6 @@ public class ParkingChargeCalculatorTest {
 
     @Test
     public void test_charge_calculated__two_hours() {
-        ParkingLot parkingLot = ParkingLot.getInstance();
-        ParkingSlot slot = parkingLot.getParkingSlots().get(1);
-
         int charge = ParkingChargeCalculator.calculateCharge(2);
 
         Assert.assertEquals(10, charge);
@@ -41,13 +38,9 @@ public class ParkingChargeCalculatorTest {
 
     @Test
     public void test_charge_calculated__more_than_two_hours() {
-        ParkingLot parkingLot = ParkingLot.getInstance();
-        ParkingSlot slot = parkingLot.getParkingSlots().get(1);
-
         int charge = ParkingChargeCalculator.calculateCharge(6);
 
         Assert.assertEquals(50, charge);
     }
-
 
 }
