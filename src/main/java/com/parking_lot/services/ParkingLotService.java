@@ -21,7 +21,7 @@ public class ParkingLotService {
         return instance;
     }
 
-    public void createParkingLot(int capacity) {
+    public void create(int capacity) {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.setTotalCapacity(capacity);
         parkingLot.setParkingSlots(createParkingSlots(capacity));

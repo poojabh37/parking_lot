@@ -20,7 +20,7 @@ public class ParkingSlotService {
         return instance;
     }
 
-    public void assignParkingSpot(String registrationNumber) {
+    public void assignSlot(String registrationNumber) {
         ParkingLot parkingLot = ParkingLot.getInstance();
         Optional<ParkingSlot> available = parkingLot.getParkingSlots()
                 .stream()
@@ -39,17 +39,21 @@ public class ParkingSlotService {
         System.out.println("Allocated slot number: " + slot.getSlotNumber());
     }
 
-    public void unAssignParkingSpot(String registrationNumber, int hours) {
+    public void unassignSlot(String registrationNumber, int hours) {
         ParkingLot parkingLot = ParkingLot.getInstance();
         Optional<ParkingSlot> available = parkingLot.getParkingSlots()
                 .stream()
-                .filter(slot -> slot.getRegistrationNumber().equals(registrationNumber))
+                .filter(slot -> isMatchingSlot(slot, registrationNumber))
                 .findFirst();
         if (available.isPresent()) {
             unAssign(available.get(), registrationNumber, hours);
         } else {
             System.out.println("Registration number " + registrationNumber + " not found");
         }
+    }
+
+    private boolean isMatchingSlot(ParkingSlot slot, String registrationNumber) {
+        return slot.isOccupied() && slot.getRegistrationNumber().equals(registrationNumber);
     }
 
     private void unAssign(ParkingSlot slot, String registrationNumber, int hours) {
