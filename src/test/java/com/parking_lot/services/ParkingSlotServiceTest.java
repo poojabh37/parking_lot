@@ -24,7 +24,7 @@ public class ParkingSlotServiceTest {
     @Test
     public void test_assign_first_parkingSlot_Successful() {
         //when
-        parkingSlotService.assignParkingLot(REGISTRATION_NUMBER);
+        parkingSlotService.assignParkingSpot(REGISTRATION_NUMBER);
         //then
         ParkingSlot parkingSlot = ParkingLot.getInstance().getParkingSlots().get(0);
         Assert.assertTrue(parkingSlot.isOccupied());
@@ -37,13 +37,27 @@ public class ParkingSlotServiceTest {
         //given
         assignAllSlots();
         //when
-        parkingSlotService.assignParkingLot(REGISTRATION_NUMBER);
+        parkingSlotService.assignParkingSpot(REGISTRATION_NUMBER);
         //then
         List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
         Assert.assertFalse(parkingSlots
                 .stream()
                 .anyMatch(slot -> slot.getRegistrationNumber().equals(REGISTRATION_NUMBER)));
     }
+
+    @Test
+    public void test_unassign_car_not_found() {
+        //given
+        assignAllSlots();
+        //when
+        parkingSlotService.unAssignParkingSpot(REGISTRATION_NUMBER, 5);
+        //then
+        List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
+        Assert.assertFalse(parkingSlots
+                .stream()
+                .anyMatch(slot -> slot.getRegistrationNumber().equals(REGISTRATION_NUMBER)));
+    }
+
 
     private void assignAllSlots() {
         List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
