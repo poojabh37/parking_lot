@@ -9,10 +9,11 @@ import org.mockito.Mockito;
 
 import java.util.List;
 
+import static com.parking_lot.services.Constants.PARKING_LOT_CAPACITY;
+import static com.parking_lot.services.Constants.REGISTRATION_NUMBER;
+
 public class ParkingSlotServiceTest {
 
-    private static final String REGISTRATION_NUMBER = "CH-01-AF-6705";
-    private static final int PARKING_LOT_CAPACITY = 3;
     private ParkingSlotService parkingSlotService = ParkingSlotService.getInstance();
     private ParkingLotService parkingLotService = ParkingLotService.getInstance();
 
@@ -31,7 +32,6 @@ public class ParkingSlotServiceTest {
         Assert.assertEquals(REGISTRATION_NUMBER, parkingSlot.getRegistrationNumber());
     }
 
-
     @Test
     public void test_assign_parkingSlot_no_Space_available() {
         //given
@@ -43,6 +43,14 @@ public class ParkingSlotServiceTest {
         Assert.assertFalse(parkingSlots
                 .stream()
                 .anyMatch(slot -> slot.getRegistrationNumber().equals(REGISTRATION_NUMBER)));
+    }
+
+    private void assignAllSlots() {
+        List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
+        for (ParkingSlot slot : parkingSlots) {
+            slot.setOccupied(true);
+            slot.setRegistrationNumber(Mockito.anyString());
+        }
     }
 
     @Test
@@ -84,13 +92,5 @@ public class ParkingSlotServiceTest {
                 .anyMatch(slot -> slot.getRegistrationNumber().equals(REGISTRATION_NUMBER)));
     }
 
-
-    private void assignAllSlots() {
-        List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
-        for (ParkingSlot slot : parkingSlots) {
-            slot.setOccupied(true);
-            slot.setRegistrationNumber(Mockito.anyString());
-        }
-    }
 
 }

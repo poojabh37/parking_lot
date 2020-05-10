@@ -56,7 +56,7 @@ public class ParkingSlotService {
         slot.setOccupied(false);
         slot.setRegistrationNumber(null);
 
-        int charge = ParkingChargeCalulator.calculateCharge (slot, hours);
+        int charge = ParkingChargeCalculator.calculateCharge(hours);
         System.out.println("Registration number " + registrationNumber +
                 " with Slot Number " + slot.getSlotNumber() + " is free with Charge " + charge);
     }
