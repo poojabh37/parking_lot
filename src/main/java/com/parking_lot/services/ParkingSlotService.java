@@ -43,7 +43,7 @@ public class ParkingSlotService {
         ParkingLot parkingLot = ParkingLot.getInstance();
         Optional<ParkingSlot> available = parkingLot.getParkingSlots()
                 .stream()
-                .filter(slot -> !slot.isOccupied())
+                .filter(slot -> slot.getRegistrationNumber().equals(registrationNumber))
                 .findFirst();
         if (available.isPresent()) {
             unAssign(available.get(), registrationNumber, hours);

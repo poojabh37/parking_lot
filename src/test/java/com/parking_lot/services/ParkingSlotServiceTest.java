@@ -46,6 +46,32 @@ public class ParkingSlotServiceTest {
     }
 
     @Test
+    public void test_unassign_car() {
+        //given
+        assignSlots();
+        //when
+        parkingSlotService.unAssignParkingSpot(REGISTRATION_NUMBER, 5);
+        //then
+        List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
+        Assert.assertFalse(parkingSlots.get(1).isOccupied());
+        Assert.assertTrue(parkingSlots
+                .stream()
+                .anyMatch(slot -> slot.getRegistrationNumber() == null));
+    }
+
+    private void assignSlots() {
+        List<ParkingSlot> slots = ParkingLot.getInstance().getParkingSlots();
+        assignSlot(slots.get(0), Mockito.anyString());
+        assignSlot(slots.get(1), REGISTRATION_NUMBER);
+        assignSlot(slots.get(2), Mockito.anyString());
+    }
+
+    private void assignSlot(ParkingSlot slot, String registrationNumber) {
+        slot.setRegistrationNumber(registrationNumber);
+        slot.setOccupied(true);
+    }
+
+    @Test
     public void test_unassign_car_not_found() {
         //given
         assignAllSlots();
