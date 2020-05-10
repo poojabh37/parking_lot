@@ -6,13 +6,17 @@ import com.parking_lot.model.ParkingSlot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingLotCreatorService {
+public class ParkingLotService {
 
-    private static ParkingLotCreatorService instance;
+    private static ParkingLotService instance;
 
-    public static ParkingLotCreatorService getInstance() {
+    private ParkingLotService() {
+
+    }
+
+    public static ParkingLotService getInstance() {
         if (instance == null) {
-            instance = new ParkingLotCreatorService();
+            instance = new ParkingLotService();
         }
         return instance;
     }
@@ -21,6 +25,7 @@ public class ParkingLotCreatorService {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.setTotalCapacity(capacity);
         parkingLot.setParkingSlots(createParkingSlots(capacity));
+        System.out.println("Created parking lot with " + capacity + " slots");
     }
 
     private List<ParkingSlot> createParkingSlots(int capacity) {
