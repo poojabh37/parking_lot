@@ -1,7 +1,5 @@
 package com.parking_lot;
 
-import com.parking_lot.model.ParkingLot;
-import com.parking_lot.model.ParkingSlot;
 import com.parking_lot.services.ParkingLotService;
 import com.parking_lot.services.ParkingSlotService;
 
@@ -12,18 +10,24 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
+        String fileName = getFileName(args);
         try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\poojbhat\\Downloads\\parking_lot_2.0.0_(1)(3) (1)\\parking_lot_2.0.0\\functional_spec\\fixtures\\file_input.txt"));
-
+            BufferedReader reader = new BufferedReader(new FileReader(fileName));
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] input = line.split(" ");
                 performOperation(input);
-
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getFileName(String[] args) {
+        if (args.length == 0) {
+            throw new TooFewArgumentsException();
+        }
+        return args[0];
     }
 
     private static void performOperation(String[] input) {
@@ -38,20 +42,11 @@ public class Main {
                 leaveParkingSpot(input);
                 break;
             case "status":
-                printStatus();
+                ParkingLotService.getInstance().printStatus();
                 break;
             default:
                 System.exit(0);
         }
-    }
-
-    private static void printStatus() {
-        ParkingLot parkingLot = ParkingLot.getInstance();
-        System.out.println("Slot No. Registration No.");
-        parkingLot.getParkingSlots()
-                .stream()
-                .filter(ParkingSlot::isOccupied)
-                .forEach(slot -> System.out.println(slot.getSlotNumber() + " " + slot.getRegistrationNumber()));
     }
 
     private static void createSlots(String[] input) {
