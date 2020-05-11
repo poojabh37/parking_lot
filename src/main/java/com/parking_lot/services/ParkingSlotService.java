@@ -1,9 +1,9 @@
 package com.parking_lot.services;
 
+import java.util.Optional;
+
 import com.parking_lot.model.ParkingLot;
 import com.parking_lot.model.ParkingSlot;
-
-import java.util.Optional;
 
 public class ParkingSlotService {
 

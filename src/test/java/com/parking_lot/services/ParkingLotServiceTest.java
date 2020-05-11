@@ -1,8 +1,9 @@
 package com.parking_lot.services;
 
-import com.parking_lot.model.ParkingLot;
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.parking_lot.model.ParkingLot;
 
 public class ParkingLotServiceTest {
 

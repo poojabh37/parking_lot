@@ -1,10 +1,10 @@
 package com.parking_lot.services;
 
-import com.parking_lot.model.ParkingLot;
-import com.parking_lot.model.ParkingSlot;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import com.parking_lot.model.ParkingLot;
+import com.parking_lot.model.ParkingSlot;
 
 public class ParkingLotService {
 

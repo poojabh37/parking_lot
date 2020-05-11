@@ -1,13 +1,14 @@
 package com.parking_lot.services;
 
-import com.parking_lot.model.ParkingLot;
-import com.parking_lot.model.ParkingSlot;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.util.List;
+import com.parking_lot.model.ParkingLot;
+import com.parking_lot.model.ParkingSlot;
 
 import static com.parking_lot.services.Constants.PARKING_LOT_CAPACITY;
 import static com.parking_lot.services.Constants.REGISTRATION_NUMBER;

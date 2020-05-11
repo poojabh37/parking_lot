@@ -1,12 +1,12 @@
 package com.parking_lot;
 
-import com.parking_lot.exception.TooFewArgumentsException;
-import com.parking_lot.services.ParkingLotService;
-import com.parking_lot.services.ParkingSlotService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+import com.parking_lot.exception.TooFewArgumentsException;
+import com.parking_lot.services.ParkingLotService;
+import com.parking_lot.services.ParkingSlotService;
 
 public class Main {
 
