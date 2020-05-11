@@ -14,10 +14,6 @@ public class ParkingSlot {
         return slotNumber;
     }
 
-    public void setSlotNumber(int slotNumber) {
-        this.slotNumber = slotNumber;
-    }
-
     public String getRegistrationNumber() {
         return registrationNumber;
     }
