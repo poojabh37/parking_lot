@@ -1,4 +1,4 @@
-package com.parking_lot;
+package com.parking_lot.exception;
 
 public class TooFewArgumentsException extends RuntimeException {
 

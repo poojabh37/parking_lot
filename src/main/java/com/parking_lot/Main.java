@@ -1,5 +1,6 @@
 package com.parking_lot;
 
+import com.parking_lot.exception.TooFewArgumentsException;
 import com.parking_lot.services.ParkingLotService;
 import com.parking_lot.services.ParkingSlotService;
 
