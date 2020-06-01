@@ -1,10 +1,9 @@
 package com.parking_lot.model;
 
-public class ParkingSlot {
+public class ParkingSlot implements Comparable {
 
     private int slotNumber;
     private Car car;
-    private boolean isOccupied;
 
     public ParkingSlot(int slotNumber) {
         this.slotNumber = slotNumber;
@@ -22,11 +21,8 @@ public class ParkingSlot {
         this.car = car;
     }
 
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        isOccupied = occupied;
+    @Override
+    public int compareTo(Object slot) {
+        return this.slotNumber - ((ParkingSlot) slot).getSlotNumber();
     }
 }

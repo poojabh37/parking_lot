@@ -1,10 +1,9 @@
 package com.parking_lot.services;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.parking_lot.model.ParkingLot;
 import com.parking_lot.model.ParkingSlot;
+
+import java.util.TreeSet;
 
 public class ParkingLotService {
 
@@ -24,12 +23,12 @@ public class ParkingLotService {
     public void create(int capacity) {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.setTotalCapacity(capacity);
-        parkingLot.setParkingSlots(createParkingSlots(capacity));
+        parkingLot.setFreeParkingSlots(createParkingSlots(capacity));
         System.out.println("Created parking lot with " + capacity + " slots");
     }
 
-    private List<ParkingSlot> createParkingSlots(int capacity) {
-        List<ParkingSlot> slots = new ArrayList<>();
+    private TreeSet<ParkingSlot> createParkingSlots(int capacity) {
+        TreeSet<ParkingSlot> slots = new TreeSet<>();
         for (int slotNumber = 1; slotNumber <= capacity; slotNumber++) {
             slots.add(new ParkingSlot(slotNumber));
         }

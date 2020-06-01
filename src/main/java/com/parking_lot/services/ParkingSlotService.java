@@ -6,11 +6,12 @@ import com.parking_lot.model.Car;
 import com.parking_lot.model.ParkingLot;
 import com.parking_lot.model.ParkingSlot;
 
-import java.util.Optional;
+import java.util.Map;
 
 public class ParkingSlotService {
 
     private static ParkingSlotService instance;
+    private ParkingLot parkingLot = ParkingLot.getInstance();
 
     private ParkingSlotService() {
 
@@ -23,46 +24,41 @@ public class ParkingSlotService {
         return instance;
     }
 
-    public void assignSlot(Car car) {
-        ParkingLot parkingLot = ParkingLot.getInstance();
-        Optional<ParkingSlot> available = parkingLot.getParkingSlots()
-                .stream()
-                .filter(slot -> !slot.isOccupied())
-                .findFirst();
-        if (!available.isPresent()) {
+    public ParkingSlot assignSlot(Car car) {
+        validateParkingLotFull();
+        ParkingSlot available = parkingLot.getFreeParkingSlots().first();
+        available.setCar(car);
+        parkingLot.getFreeParkingSlots().remove(available);
+        parkingLot.getOccupiedParkingSlots().put(car.getRegistrationNumber(), available);
+        return available;
+    }
+
+    private void validateParkingLotFull() {
+        if (isParkingLotFull()) {
             throw new ParkingLotFullException();
-        } else {
-            assign(available.get(), car);
         }
     }
 
-    private void assign(ParkingSlot slot, Car car) {
-        slot.setOccupied(true);
-        slot.setCar(car);
-        System.out.println("Allocated slot number: " + slot.getSlotNumber());
+    private boolean isParkingLotFull() {
+        return ParkingLot.getInstance().getFreeParkingSlots().isEmpty();
     }
 
     public void unassignSlot(String registrationNumber, int hours) {
-        Optional<ParkingSlot> slot = getParkingSlot(registrationNumber);
-        if (!slot.isPresent()) {
+        Map<String, ParkingSlot> occupiedSlots = parkingLot.getOccupiedParkingSlots();
+        validateRegistrationNumberPresent(occupiedSlots, registrationNumber);
+        ParkingSlot slot = occupiedSlots.get(registrationNumber);
+        unAssign(slot, registrationNumber, hours);
+    }
+
+    private void validateRegistrationNumberPresent(Map<String, ParkingSlot> occupiedSlots,
+                                                   String registrationNumber) {
+        if (!occupiedSlots.containsKey(registrationNumber)) {
             throw new RegistrationNumberNotFoundException();
         }
-        unAssign(slot.get(), registrationNumber, hours);
-    }
 
-    private Optional<ParkingSlot> getParkingSlot(String registrationNumber) {
-        return ParkingLot.getInstance().getParkingSlots()
-                .stream()
-                .filter(slot -> isMatchingSlot(slot, registrationNumber))
-                .findFirst();
-    }
-
-    private boolean isMatchingSlot(ParkingSlot slot, String registrationNumber) {
-        return slot.isOccupied() && slot.getCar().getRegistrationNumber().equals(registrationNumber);
     }
 
     private void unAssign(ParkingSlot slot, String registrationNumber, int hours) {
-        slot.setOccupied(false);
         slot.setCar(null);
 
         int charge = ParkingChargeCalculator.calculateCharge(hours);

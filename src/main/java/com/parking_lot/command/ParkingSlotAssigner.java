@@ -1,6 +1,7 @@
 package com.parking_lot.command;
 
 import com.parking_lot.model.Car;
+import com.parking_lot.model.ParkingSlot;
 import com.parking_lot.services.ParkingSlotService;
 
 public class ParkingSlotAssigner implements CommandExecutor {
@@ -10,7 +11,8 @@ public class ParkingSlotAssigner implements CommandExecutor {
     @Override
     public void execute(String[] arguments) {
         Car car = getCar(arguments);
-        parkingService.assignSlot(car);
+        ParkingSlot slot = parkingService.assignSlot(car);
+        System.out.println("Allocated slot number: " + slot.getSlotNumber());
     }
 
     private Car getCar(String[] arguments) {
