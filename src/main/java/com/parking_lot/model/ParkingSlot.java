@@ -3,7 +3,7 @@ package com.parking_lot.model;
 public class ParkingSlot {
 
     private int slotNumber;
-    private String registrationNumber;
+    private Car car;
     private boolean isOccupied;
 
     public ParkingSlot(int slotNumber) {
@@ -14,12 +14,12 @@ public class ParkingSlot {
         return slotNumber;
     }
 
-    public String getRegistrationNumber() {
-        return registrationNumber;
+    public Car getCar() {
+        return car;
     }
 
-    public void setRegistrationNumber(String registrationNumber) {
-        this.registrationNumber = registrationNumber;
+    public void setCar(Car car) {
+        this.car = car;
     }
 
     public boolean isOccupied() {

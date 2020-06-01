@@ -36,12 +36,4 @@ public class ParkingLotService {
         return slots;
     }
 
-    public void printStatus() {
-        List<ParkingSlot> slots = ParkingLot.getInstance().getParkingSlots();
-        System.out.println("Slot No.    Registration No.");
-        slots.stream()
-                .filter(ParkingSlot::isOccupied)
-                .forEach(s -> System.out.println(s.getSlotNumber() + "           "
-                        + s.getRegistrationNumber()));
-    }
 }

@@ -1,21 +1,22 @@
 package com.parking_lot;
 
+import com.parking_lot.command.Command;
+import com.parking_lot.command.CommandExecutor;
+import com.parking_lot.command.CommandExecutorCollector;
+import com.parking_lot.exception.ParkingLotFullException;
+import com.parking_lot.exception.RegistrationNumberNotFoundException;
+import com.parking_lot.exception.TooFewArgumentsException;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
-
-import com.parking_lot.exception.TooFewArgumentsException;
-import com.parking_lot.services.ParkingLotService;
-import com.parking_lot.services.ParkingSlotService;
 
 public class Main {
 
     public static void main(String[] args) {
         String fileName = getFileName(args);
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] input = line.split(" ");
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String input;
+            while ((input = reader.readLine()) != null) {
                 performOperation(input);
             }
         } catch (TooFewArgumentsException e) {
@@ -36,39 +37,16 @@ public class Main {
         return args[0];
     }
 
-    private static void performOperation(String[] input) {
-        switch (input[0]) {
-            case "create_parking_lot":
-                createSlots(input);
-                break;
-            case "park":
-                parkVehicle(input);
-                break;
-            case "leave":
-                leaveParkingSpot(input);
-                break;
-            case "status":
-                ParkingLotService.getInstance().printStatus();
-                break;
-            default:
-                System.exit(0);
-        }
+    private static void performOperation(String input) {
+        String[] operationArguments = input.split(" ");
+        Command command = Command.valueOf(operationArguments[0].toUpperCase());
+        CommandExecutor commandExecutor = getCommandExecutor(command);
+        commandExecutor.execute(operationArguments);
     }
 
-    private static void createSlots(String[] input) {
-        int numberOfSpots = Integer.parseInt(input[1]);
-        ParkingLotService.getInstance().create(numberOfSpots);
-    }
-
-    private static void parkVehicle(String[] input) {
-        String registrationNumber = input[1];
-        ParkingSlotService.getInstance().assignSlot(registrationNumber);
-    }
-
-    private static void leaveParkingSpot(String[] input) {
-        String registrationNumber = input[1];
-        int hours = Integer.parseInt(input[2]);
-        ParkingSlotService.getInstance().unassignSlot(registrationNumber, hours);
+    private static CommandExecutor getCommandExecutor(Command command) {
+        CommandExecutorCollector executorCollector = new CommandExecutorCollector();
+        return executorCollector.getCommandVsCommandExecutor().get(command);
     }
 
 }
