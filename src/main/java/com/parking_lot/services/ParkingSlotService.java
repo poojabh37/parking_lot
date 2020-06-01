@@ -29,7 +29,7 @@ public class ParkingSlotService {
         if (available.isPresent()) {
             assign(available.get(), registrationNumber);
         } else {
-            System.out.println("Sorry, parking lot is full");
+            assign(available.get(), car);
         }
     }
 
@@ -40,16 +40,18 @@ public class ParkingSlotService {
     }
 
     public void unassignSlot(String registrationNumber, int hours) {
-        ParkingLot parkingLot = ParkingLot.getInstance();
-        Optional<ParkingSlot> available = parkingLot.getParkingSlots()
+        Optional<ParkingSlot> slot = getParkingSlot(registrationNumber);
+        if (!slot.isPresent()) {
+            throw new RegistrationNumberNotFoundException();
+        }
+        unAssign(slot.get(), registrationNumber, hours);
+    }
+
+    private Optional<ParkingSlot> getParkingSlot(String registrationNumber) {
+        return ParkingLot.getInstance().getParkingSlots()
                 .stream()
                 .filter(slot -> isMatchingSlot(slot, registrationNumber))
                 .findFirst();
-        if (available.isPresent()) {
-            unAssign(available.get(), registrationNumber, hours);
-        } else {
-            System.out.println("Registration number " + registrationNumber + " not found");
-        }
     }
 
     private boolean isMatchingSlot(ParkingSlot slot, String registrationNumber) {

@@ -1,14 +1,14 @@
 package com.parking_lot.services;
 
-import java.util.List;
-
+import com.parking_lot.model.Car;
+import com.parking_lot.model.ParkingLot;
+import com.parking_lot.model.ParkingSlot;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import com.parking_lot.model.ParkingLot;
-import com.parking_lot.model.ParkingSlot;
+import java.util.List;
 
 import static com.parking_lot.services.Constants.PARKING_LOT_CAPACITY;
 
@@ -26,7 +26,7 @@ public class ParkingChargeCalculatorTest {
         List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
         for (ParkingSlot slot : parkingSlots) {
             slot.setOccupied(true);
-            slot.setRegistrationNumber(Mockito.anyString());
+            slot.setCar(new Car(Mockito.anyString(), Mockito.anyString()));
         }
     }
 

@@ -2,7 +2,6 @@ package com.parking_lot;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.IOException;
 
 import com.parking_lot.exception.TooFewArgumentsException;
 import com.parking_lot.services.ParkingLotService;
@@ -19,8 +18,14 @@ public class Main {
                 String[] input = line.split(" ");
                 performOperation(input);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (TooFewArgumentsException e) {
+            System.out.println(e.getMessage());
+        } catch (RegistrationNumberNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (ParkingLotFullException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
