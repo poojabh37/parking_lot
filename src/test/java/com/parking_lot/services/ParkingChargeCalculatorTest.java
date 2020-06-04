@@ -1,34 +1,9 @@
 package com.parking_lot.services;
 
-import com.parking_lot.model.Car;
-import com.parking_lot.model.ParkingLot;
-import com.parking_lot.model.ParkingSlot;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mockito;
-
-import java.util.List;
-
-import static com.parking_lot.services.Constants.PARKING_LOT_CAPACITY;
 
 public class ParkingChargeCalculatorTest {
-
-    private ParkingLotService parkingLotService = ParkingLotService.getInstance();
-
-    @Before
-    public void init() {
-        parkingLotService.create(PARKING_LOT_CAPACITY);
-        assignAllSlots();
-    }
-
-    private void assignAllSlots() {
-        List<ParkingSlot> parkingSlots = ParkingLot.getInstance().getParkingSlots();
-        for (ParkingSlot slot : parkingSlots) {
-            slot.setOccupied(true);
-            slot.setCar(new Car(Mockito.anyString(), Mockito.anyString()));
-        }
-    }
 
     @Test
     public void test_charge_calculated__two_hours() {

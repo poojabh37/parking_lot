@@ -59,11 +59,16 @@ public class ParkingSlotService {
     }
 
     private void unAssign(ParkingSlot slot, String registrationNumber, int hours) {
+        parkingLot.getOccupiedParkingSlots().remove(registrationNumber);
         slot.setCar(null);
+        parkingLot.getFreeParkingSlots().add(slot);
+        calculateCharge(slot.getSlotNumber(), registrationNumber, hours);
+    }
 
+    private void calculateCharge(int slotNumber, String registrationNumber, int hours) {
         int charge = ParkingChargeCalculator.calculateCharge(hours);
-        System.out.println("Registration number " + registrationNumber +
-                " with Slot Number " + slot.getSlotNumber() + " is free with Charge " + charge);
+        System.out.println(String.format("Registration number %s with Slot Number %s is free with Charge %s",
+                registrationNumber, slotNumber, charge));
     }
 
 }

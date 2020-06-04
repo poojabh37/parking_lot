@@ -7,7 +7,7 @@ import java.util.TreeSet;
 public class ParkingLot {
 
     private static ParkingLot instance;
-    private Map<String, ParkingSlot> occupiedParkingSlots = new LinkedHashMap<>();
+    private Map<String, ParkingSlot> occupiedParkingSlots;
     private TreeSet<ParkingSlot> freeParkingSlots;
     private int totalCapacity;
 

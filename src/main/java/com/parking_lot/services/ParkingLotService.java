@@ -3,6 +3,8 @@ package com.parking_lot.services;
 import com.parking_lot.model.ParkingLot;
 import com.parking_lot.model.ParkingSlot;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.TreeSet;
 
 public class ParkingLotService {
@@ -24,6 +26,7 @@ public class ParkingLotService {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.setTotalCapacity(capacity);
         parkingLot.setFreeParkingSlots(createParkingSlots(capacity));
+        parkingLot.setOccupiedParkingSlots(new LinkedHashMap<>());
         System.out.println("Created parking lot with " + capacity + " slots");
     }
 
