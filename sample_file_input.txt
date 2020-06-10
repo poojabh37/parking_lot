@@ -6,6 +6,7 @@ park KA-01-HH-7777 red
 park KA-01-HH-2701 blue
 park KA-01-HH-3141 white
 leave KA-01-HH-3141 4
+leave KA-01-HH-7777 2
 status
 park KA-01-P-333 red
 park DL-12-AA-9999 blue
