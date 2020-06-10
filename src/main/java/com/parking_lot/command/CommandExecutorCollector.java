@@ -5,19 +5,19 @@ import java.util.Map;
 
 import static com.parking_lot.command.Command.*;
 
-public class CommandExecutorCollector {
+class CommandExecutorCollector {
 
-    private Map<Command, CommandExecutor> commandVsCommandExecutor = new HashMap<>();
+    private static Map<Command, CommandExecutor> commandVsCommandExecutor = new HashMap<>();
 
-    public CommandExecutorCollector() {
+    static {
         commandVsCommandExecutor.put(CREATE_PARKING_LOT, new ParkingLotCreator());
         commandVsCommandExecutor.put(PARK, new ParkingSlotAssigner());
         commandVsCommandExecutor.put(LEAVE, new ParkingSlotUnassigner());
         commandVsCommandExecutor.put(STATUS, new ParkingLotStatusFinder());
     }
 
-    public Map<Command, CommandExecutor> getCommandVsCommandExecutor() {
-        return commandVsCommandExecutor;
+    static CommandExecutor getCommandExecutor(Command command) {
+        return commandVsCommandExecutor.get(command);
     }
 
 }

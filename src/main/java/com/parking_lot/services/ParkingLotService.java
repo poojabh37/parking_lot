@@ -4,8 +4,8 @@ import com.parking_lot.model.ParkingLot;
 import com.parking_lot.model.ParkingSlot;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.TreeSet;
+import java.util.stream.IntStream;
 
 public class ParkingLotService {
 
@@ -26,15 +26,14 @@ public class ParkingLotService {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.setTotalCapacity(capacity);
         parkingLot.setFreeParkingSlots(createParkingSlots(capacity));
-        parkingLot.setOccupiedParkingSlots(new LinkedHashMap<>());
+        parkingLot.setOccupiedParkingSlots(new HashMap<>());
         System.out.println("Created parking lot with " + capacity + " slots");
     }
 
     private TreeSet<ParkingSlot> createParkingSlots(int capacity) {
         TreeSet<ParkingSlot> slots = new TreeSet<>();
-        for (int slotNumber = 1; slotNumber <= capacity; slotNumber++) {
-            slots.add(new ParkingSlot(slotNumber));
-        }
+        IntStream.rangeClosed(1, capacity)
+                .forEachOrdered(slotNumber -> slots.add(new ParkingSlot(slotNumber)));
         return slots;
     }
 
