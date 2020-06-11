@@ -1,6 +1,6 @@
 package com.parking_lot.command;
 
-public interface CommandExecutor {
+interface CommandExecutor {
 
     void execute(String[] arguments);
 

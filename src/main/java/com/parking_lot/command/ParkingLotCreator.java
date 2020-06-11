@@ -2,7 +2,7 @@ package com.parking_lot.command;
 
 import com.parking_lot.services.ParkingLotService;
 
-public class ParkingLotCreator implements CommandExecutor {
+class ParkingLotCreator implements CommandExecutor {
 
     private ParkingLotService parkingService = ParkingLotService.getInstance();
 

@@ -4,7 +4,7 @@ import com.parking_lot.model.Car;
 import com.parking_lot.model.ParkingSlot;
 import com.parking_lot.services.ParkingSlotService;
 
-public class ParkingSlotAssigner implements CommandExecutor {
+class ParkingSlotAssigner implements CommandExecutor {
 
     private ParkingSlotService parkingService = ParkingSlotService.getInstance();
 

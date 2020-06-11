@@ -6,6 +6,7 @@ import com.parking_lot.model.Car;
 import com.parking_lot.model.ParkingLot;
 import com.parking_lot.model.ParkingSlot;
 
+import java.util.Comparator;
 import java.util.Map;
 
 public class ParkingSlotService {
@@ -69,6 +70,15 @@ public class ParkingSlotService {
         int charge = ParkingChargeCalculator.calculateCharge(hours);
         System.out.println(String.format("Registration number %s with Slot Number %s is free with Charge %s",
                 registrationNumber, slotNumber, charge));
+    }
+
+    public void printStatus(Map<String, ParkingSlot> occupiedSlots) {
+        System.out.println("Slot No.    Registration No.");
+        occupiedSlots.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.comparingInt(ParkingSlot::getSlotNumber)))
+                .forEach(entry -> System.out.println(entry.getValue().getSlotNumber() + "           "
+                        + entry.getKey()));
     }
 
 }
