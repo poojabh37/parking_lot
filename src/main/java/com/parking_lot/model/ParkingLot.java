@@ -8,7 +8,6 @@ public class ParkingLot {
     private static ParkingLot instance;
     private Map<String, ParkingSlot> occupiedParkingSlots;
     private TreeSet<ParkingSlot> freeParkingSlots;
-    private int totalCapacity;
 
     private ParkingLot() {
 
@@ -27,14 +26,6 @@ public class ParkingLot {
 
     public void setOccupiedParkingSlots(Map<String, ParkingSlot> occupiedParkingSlots) {
         this.occupiedParkingSlots = occupiedParkingSlots;
-    }
-
-    public int getTotalCapacity() {
-        return totalCapacity;
-    }
-
-    public void setTotalCapacity(int totalCapacity) {
-        this.totalCapacity = totalCapacity;
     }
 
     public TreeSet<ParkingSlot> getFreeParkingSlots() {
