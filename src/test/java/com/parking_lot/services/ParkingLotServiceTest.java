@@ -13,6 +13,6 @@ public class ParkingLotServiceTest {
     public void test_parkingLot_created_successfully() {
         parkingLotCreatorService.create(5);
         Assert.assertEquals(5, parkingLot.getFreeParkingSlots().size());
-        Assert.assertEquals(0, parkingLot.getOccupiedParkingSlots().size());
+        Assert.assertEquals(0, parkingLot.getRegistrationNumberToOccupiedParkingSlots().size());
     }
 }

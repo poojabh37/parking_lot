@@ -26,8 +26,8 @@ public class ParkingSlotServiceTest {
         //when
         parkingSlotService.assignSlot(new Car(REGISTRATION_NUMBER, "blue"));
         //then
-        Assert.assertNotNull(parkingLot.getOccupiedParkingSlots().get(REGISTRATION_NUMBER));
-        Assert.assertEquals(1, parkingLot.getOccupiedParkingSlots().size());
+        Assert.assertNotNull(parkingLot.getRegistrationNumberToOccupiedParkingSlots().get(REGISTRATION_NUMBER));
+        Assert.assertEquals(1, parkingLot.getRegistrationNumberToOccupiedParkingSlots().size());
         Assert.assertEquals(PARKING_LOT_CAPACITY - 1, parkingLot.getFreeParkingSlots().size());
     }
 
@@ -46,8 +46,8 @@ public class ParkingSlotServiceTest {
         //when
         parkingSlotService.unassignSlot(REGISTRATION_NUMBER, 5);
         //then
-        Assert.assertNull(parkingLot.getOccupiedParkingSlots().get(REGISTRATION_NUMBER));
-        Assert.assertEquals(PARKING_LOT_CAPACITY-1, parkingLot.getOccupiedParkingSlots().size());
+        Assert.assertNull(parkingLot.getRegistrationNumberToOccupiedParkingSlots().get(REGISTRATION_NUMBER));
+        Assert.assertEquals(PARKING_LOT_CAPACITY-1, parkingLot.getRegistrationNumberToOccupiedParkingSlots().size());
         Assert.assertEquals(1, parkingLot.getFreeParkingSlots().size());
     }
 
