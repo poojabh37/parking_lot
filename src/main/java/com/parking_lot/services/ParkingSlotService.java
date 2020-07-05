@@ -41,7 +41,7 @@ public class ParkingSlotService {
     }
 
     private boolean isParkingLotFull() {
-        return ParkingLot.getInstance().getFreeParkingSlots().isEmpty();
+        return parkingLot.getFreeParkingSlots().isEmpty();
     }
 
     public void unassignSlot(String registrationNumber, int hours) {
@@ -56,7 +56,6 @@ public class ParkingSlotService {
         if (!occupiedSlots.containsKey(registrationNumber)) {
             throw new RegistrationNumberNotFoundException();
         }
-
     }
 
     private void unAssign(ParkingSlot slot, String registrationNumber, int hours) {
@@ -77,8 +76,8 @@ public class ParkingSlotService {
         occupiedSlots.entrySet()
                 .stream()
                 .sorted(Map.Entry.comparingByValue(Comparator.comparingInt(ParkingSlot::getSlotNumber)))
-                .forEach(entry -> System.out.println(entry.getValue().getSlotNumber() + "           "
-                        + entry.getKey()));
+                .forEach(entry -> System.out.println(entry.getValue().getSlotNumber()
+                        + "           " + entry.getKey()));
     }
 
 }

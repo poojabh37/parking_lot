@@ -2,7 +2,7 @@ package com.parking_lot.exception;
 
 import static com.parking_lot.command.ErrorConstants.OPERATION_NOT_FOUND_ERROR_MESSAGE;
 
-public class OperationNotFoundException extends IllegalArgumentException {
+public class OperationNotFoundException extends RuntimeException {
 
     private String message;
 
