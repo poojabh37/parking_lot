@@ -29,7 +29,7 @@ public class ParkingSlotService {
         validateParkingLotFull();
         ParkingSlot available = parkingLot.getFreeParkingSlots().first();
         available.setCar(car);
-        parkingLot.getFreeParkingSlots().remove(available);
+        parkingLot.getFreeParkingSlots().remove(available); // you don't have to override equals and hashcode ?? or isComapre enough? 
         parkingLot.getOccupiedParkingSlots().put(car.getRegistrationNumber(), available);
         return available;
     }
