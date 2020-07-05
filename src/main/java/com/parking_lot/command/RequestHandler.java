@@ -6,7 +6,7 @@ public class RequestHandler {
 
     public static void handleRequest(String input) {
         String[] operationArguments = input.split(" ");
-        Command command = getCommand(operationArguments[0]);// what if this command is not found
+        Command command = getCommand(operationArguments[0]);
         CommandExecutor commandExecutor = CommandExecutorCollector.getCommandExecutor(command);
         commandExecutor.execute(operationArguments);
     }
