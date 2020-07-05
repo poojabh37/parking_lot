@@ -12,7 +12,7 @@ class ParkingLotStatusFinder implements CommandExecutor {
 
     @Override
     public void execute(String[] arguments) {
-        Map<String, ParkingSlot> occupiedSlots = ParkingLot.getInstance().getOccupiedParkingSlots();
+        Map<String, ParkingSlot> occupiedSlots = ParkingLot.getInstance().getRegistrationNumberToOccupiedParkingSlots();
         parkingSlotService.printStatus(occupiedSlots);
     }
 

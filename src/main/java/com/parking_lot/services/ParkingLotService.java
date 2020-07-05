@@ -25,7 +25,7 @@ public class ParkingLotService {
     public void create(int capacity) {
         ParkingLot parkingLot = ParkingLot.getInstance();
         parkingLot.setFreeParkingSlots(createParkingSlots(capacity));
-        parkingLot.setOccupiedParkingSlots(new HashMap<>());
+        parkingLot.setRegistrationNumberToOccupiedParkingSlots(new HashMap<>());
         System.out.println("Created parking lot with " + capacity + " slots");
     }
 

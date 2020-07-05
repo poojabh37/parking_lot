@@ -7,7 +7,7 @@ import java.util.TreeSet;
 public class ParkingLot {
 
     private static ParkingLot instance;
-    private Map<String, ParkingSlot> occupiedParkingSlots;
+    private Map<String, ParkingSlot> registrationNumberToOccupiedParkingSlots;
     private TreeSet<ParkingSlot> freeParkingSlots;
 
     private ParkingLot() {
@@ -21,12 +21,12 @@ public class ParkingLot {
         return instance;
     }
 
-    public Map<String, ParkingSlot> getOccupiedParkingSlots() {
-        return occupiedParkingSlots;
+    public Map<String, ParkingSlot> getRegistrationNumberToOccupiedParkingSlots() {
+        return registrationNumberToOccupiedParkingSlots;
     }
 
-    public void setOccupiedParkingSlots(Map<String, ParkingSlot> occupiedParkingSlots) {
-        this.occupiedParkingSlots = occupiedParkingSlots;
+    public void setRegistrationNumberToOccupiedParkingSlots(Map<String, ParkingSlot> registrationNumberToOccupiedParkingSlots) {
+        this.registrationNumberToOccupiedParkingSlots = registrationNumberToOccupiedParkingSlots;
     }
 
     public TreeSet<ParkingSlot> getFreeParkingSlots() {
@@ -42,12 +42,12 @@ public class ParkingLot {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ParkingLot that = (ParkingLot) o;
-        return Objects.equals(occupiedParkingSlots, that.occupiedParkingSlots) &&
+        return Objects.equals(registrationNumberToOccupiedParkingSlots, that.registrationNumberToOccupiedParkingSlots) &&
                 Objects.equals(freeParkingSlots, that.freeParkingSlots);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(occupiedParkingSlots, freeParkingSlots);
+        return Objects.hash(registrationNumberToOccupiedParkingSlots, freeParkingSlots);
     }
 }

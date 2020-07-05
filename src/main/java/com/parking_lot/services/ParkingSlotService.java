@@ -30,7 +30,8 @@ public class ParkingSlotService {
         ParkingSlot available = parkingLot.getFreeParkingSlots().first();
         available.setCar(car);
         parkingLot.getFreeParkingSlots().remove(available);
-        parkingLot.getOccupiedParkingSlots().put(car.getRegistrationNumber(), available);
+        parkingLot.getRegistrationNumberToOccupiedParkingSlots()
+                .put(car.getRegistrationNumber(), available);
         return available;
     }
 
@@ -45,7 +46,7 @@ public class ParkingSlotService {
     }
 
     public void unassignSlot(String registrationNumber, int hours) {
-        Map<String, ParkingSlot> occupiedSlots = parkingLot.getOccupiedParkingSlots();
+        Map<String, ParkingSlot> occupiedSlots = parkingLot.getRegistrationNumberToOccupiedParkingSlots();
         validateRegistrationNumberPresent(occupiedSlots, registrationNumber);
         ParkingSlot slot = occupiedSlots.get(registrationNumber);
         unAssign(slot, registrationNumber, hours);
@@ -59,7 +60,7 @@ public class ParkingSlotService {
     }
 
     private void unAssign(ParkingSlot slot, String registrationNumber, int hours) {
-        parkingLot.getOccupiedParkingSlots().remove(registrationNumber);
+        parkingLot.getRegistrationNumberToOccupiedParkingSlots().remove(registrationNumber);
         slot.setCar(null);
         parkingLot.getFreeParkingSlots().add(slot);
         calculateCharge(slot.getSlotNumber(), registrationNumber, hours);
