@@ -1,6 +1,7 @@
 package com.parking_lot.model;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeSet;
 
 public class ParkingLot {
@@ -34,5 +35,19 @@ public class ParkingLot {
 
     public void setFreeParkingSlots(TreeSet<ParkingSlot> freeParkingSlots) {
         this.freeParkingSlots = freeParkingSlots;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParkingLot that = (ParkingLot) o;
+        return Objects.equals(occupiedParkingSlots, that.occupiedParkingSlots) &&
+                Objects.equals(freeParkingSlots, that.freeParkingSlots);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(occupiedParkingSlots, freeParkingSlots);
     }
 }
