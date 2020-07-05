@@ -1,6 +1,7 @@
 package com.parking_lot;
 
 import com.parking_lot.command.RequestHandler;
+import com.parking_lot.exception.OperationNotFoundException;
 import com.parking_lot.exception.ParkingLotFullException;
 import com.parking_lot.exception.RegistrationNumberNotFoundException;
 import com.parking_lot.exception.TooFewArgumentsException;
@@ -18,6 +19,8 @@ public class Main {
                 RequestHandler.handleRequest(input);
             }
         } catch (TooFewArgumentsException e) {
+            System.out.println(e.getMessage());
+        } catch (OperationNotFoundException e) {
             System.out.println(e.getMessage());
         } catch (RegistrationNumberNotFoundException e) {
             System.out.println(e.getMessage());
